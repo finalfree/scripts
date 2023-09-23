@@ -80,11 +80,10 @@ systemctl enable trojan-go
 
 echo "申请SSL证书"
 
-curl https://get.acme.sh | sh -s email=my@"$1"
-source /root/.bashrc
+curl https://get.acme.sh | bash -s email=my@"$1"
 
-acme.sh --issue -d "$1" --nginx
-acme.sh --install-cert -d "$1" \
+/root/.acme.sh/acme.sh --issue -d "$1" --nginx
+/root/.acme.sh/acme.sh --install-cert -d "$1" \
 --cert-file      /etc/trojan-go/server.crt  \
 --key-file       /etc/trojan-go/server.key  \
 --reloadcmd     "systemctl restart trojan-go"
