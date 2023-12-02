@@ -65,10 +65,12 @@ EOF
 
 cat > "/lib/systemd/system/trojan-go.service" <<EOF
 Description=trojan
-After=network.target
+After=network.target nginx.service
+Requires=nginx.service
 
 [Service]
 Type=simple
+ExecStartPre=/bin/sleep 5
 ExecStart=/usr/local/bin/trojan-go -config /etc/trojan-go/config.yaml
 
 [Install]
